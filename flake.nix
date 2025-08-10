@@ -34,9 +34,10 @@
     stylix,
     spicetify-nix,
     ...
-    }: let
+    } @ inputs: let
       system = "x86_64-linux";
-      pkgs-unstable = self.inputs.hyprland.inputs.nixpkgs.legacyPackages.${pkgs.stdenv.hostPlatform.system};
+      specialArgs = { inherit inputs; }; # this is the important part
+      pkgs-unstable = inputs.hyprland.inputs.nixpkgs.legacyPackages.${pkgs.stdenv.hostPlatform.system};
       # User's specific information
       personal = {
         city = "Hanoi";
@@ -79,8 +80,8 @@
             {
               programs.hyprland = {
                 enable = true;
-                withUWSM = true; # Universal Wayland Session Manager - replaces app2unit
-                package = self.inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;
+                package = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;
+                portalPackage = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.xdg-desktop-portal-hyprland;
               };
 
               xdg.portal = {
