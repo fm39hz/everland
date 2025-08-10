@@ -1,5 +1,5 @@
 # Basic NixOS configuration for use with flakes
-{  pkgs, ... }:
+{  pkgs, personal, ... }:
 
 {
   imports = [
@@ -111,7 +111,7 @@
       settings = {
         default_session = {
           command = "uwsm start hyprland-uwsm.desktop";
-          user = "fm39hz";
+          user = personal.user;
         };
       };
     };
@@ -130,8 +130,7 @@
     
     # Input method support
     services.xserver = {
-      enable = true;
-      videoDrivers = [ "amdgpu" ];
+      enable = false;
     };
   };
   
