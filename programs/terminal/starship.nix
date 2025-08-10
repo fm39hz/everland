@@ -7,28 +7,28 @@
     settings = {
       # Use everforest-style prompt based on existing config
       format = ''
-        $os\
-        $username\
-        $hostname\
-        [](bg:color_yellow fg:color_green)\
-        $directory\
-        [](fg:color_yellow bg:color_aqua)\
-        $git_branch\
-        $git_status\
-        [](fg:color_aqua bg:color_blue)\
-        $c\
-        $rust\
-        $golang\
-        $nodejs\
-        $php\
-        $java\
-        $kotlin\
-        $haskell\
-        $python\
-        [](fg:color_blue bg:color_bg3)\
-        $docker_context\
-        $conda\
-        [](fg:color_bg3 bg:transparent)\
+        $os\\
+        $username\\
+        $hostname\\
+        [](bg:color_yellow fg:color_green)\\
+        $directory\\
+        [](fg:color_yellow bg:color_aqua)\\
+        $git_branch\\
+        $git_status\\
+        [](fg:color_aqua bg:color_blue)\\
+        $c\\
+        $rust\\
+        $golang\\
+        $nodejs\\
+        $php\\
+        $java\\
+        $kotlin\\
+        $haskell\\
+        $python\\
+        [](fg:color_blue bg:color_bg3)\\
+        $docker_context\\
+        $conda\\
+        [](fg:color_bg3 bg:transparent)\\
         $line_break$character'';
 
       # palette = "everforest_dark";
