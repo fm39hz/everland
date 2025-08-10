@@ -1,5 +1,5 @@
 # Basic NixOS configuration for use with flakes
-{ config, pkgs, lib, ... }:
+{  pkgs, ... }:
 
 {
   imports = [
@@ -125,8 +125,6 @@
       package = pkgs.plocate;
     };
     
-    # Gaming support - Steam configured separately
-    
     # Hardware support
     fwupd.enable = true; # Firmware updates
     
@@ -135,7 +133,6 @@
       enable = true;
       videoDrivers = [ "amdgpu" ];
     };
-    displayManager.gdm.enable = false; # We use greetd instead
   };
   
   # Hardware acceleration
