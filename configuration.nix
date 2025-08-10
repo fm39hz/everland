@@ -107,9 +107,10 @@
     # Greetd login manager (alternative to display managers)
     greetd = {
       enable = true;
+      vt = 2;
       settings = {
         default_session = {
-          command = "uwsm start -S hyprland-uwsm.desktop";
+          command = "uwsm start hyprland-uwsm.desktop";
           user = "fm39hz";
         };
       };
@@ -130,7 +131,10 @@
     fwupd.enable = true; # Firmware updates
     
     # Input method support
-    xserver.enable = true;
+    services.xserver = {
+      enable = true;
+      videoDrivers = [ "amdgpu" ];
+    };
     displayManager.gdm.enable = false; # We use greetd instead
   };
   
