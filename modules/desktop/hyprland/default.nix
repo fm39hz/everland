@@ -1,6 +1,7 @@
 {
   pkgs,
   personal,
+  config,
   ...
 }:
 {
@@ -15,7 +16,7 @@
     ./hypridle.nix
     ./hyprlock.nix
   ];
-  
+  xdg.configFile."uwsm/env".source = "${config.home.sessionVariablesPackage}/etc/profile.d/hm-session-vars.sh"; 
   home.packages = with pkgs; [
     # Hyprland ecosystem (packages needed for desktop functionality)
     hyprpaper

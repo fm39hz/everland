@@ -31,13 +31,12 @@
     self,
     nixpkgs,
     home-manager,
-    inputs,
     stylix,
     spicetify-nix,
     ...
     }: let
       system = "x86_64-linux";
-      pkgs-unstable = inputs.hyprland.inputs.nixpkgs.legacyPackages.${pkgs.stdenv.hostPlatform.system};
+      pkgs-unstable = self.inputs.hyprland.inputs.nixpkgs.legacyPackages.${pkgs.stdenv.hostPlatform.system};
       # User's specific information
       personal = {
         city = "Hanoi";
@@ -81,7 +80,7 @@
               programs.hyprland = {
                 enable = true;
                 withUWSM = true; # Universal Wayland Session Manager - replaces app2unit
-                package = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;
+                package = self.inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;
               };
 
               xdg.portal = {
