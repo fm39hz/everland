@@ -2,6 +2,7 @@
   description = "FM39hz's Nix flake";
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-25.05";
+    hyprland.url = "github:hyprwm/Hyprland";
     home-manager = {
       url = "github:nix-community/home-manager/release-25.05";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -24,22 +25,19 @@
       url = "github:Gerg-L/spicetify-nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    ghostty = {
-      url = "github:ghostty-org/ghostty";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
   };
 
   outputs = {
     self,
     nixpkgs,
     home-manager,
+    inputs,
     stylix,
     spicetify-nix,
     ...
     }: let
       system = "x86_64-linux";
-      
+      pkgs-unstable = inputs.hyprland.inputs.nixpkgs.legacyPackages.${pkgs.stdenv.hostPlatform.system};
       # User's specific information
       personal = {
         city = "Hanoi";
@@ -63,6 +61,13 @@
     };
     in {
       # NixOS system configuration
+      hardware.graphics = {
+        package = pkgs-unstable.mesa;
+
+        # if you also want 32-bit support (e.g for Steam)
+        enable32Bit = true;
+        package32 = pkgs-unstable.pkgsi686Linux.mesa;
+      };
       nixosConfigurations = {
         ${personal.hostname} = nixpkgs.lib.nixosSystem {
           inherit system;
@@ -76,6 +81,7 @@
               programs.hyprland = {
                 enable = true;
                 withUWSM = true; # Universal Wayland Session Manager - replaces app2unit
+                package = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;
               };
 
               xdg.portal = {
