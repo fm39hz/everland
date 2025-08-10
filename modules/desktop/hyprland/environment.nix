@@ -14,6 +14,10 @@
       "MOZ_ENABLE_WAYLAND,1"
       "HYPRCURSOR_THEME,everforest-cursors"
       "HYPRCURSOR_SIZE,32"
+      "AQ_DRM_DEVICES,/dev/dri/card1"
+      "WLR_DRM_DEVICES,/dev/dri/card1"
+      "AQ_DRM_DEVICES,/dev/dri/card1"
+      "AQ_WLR_DEVICES,/dev/dri/card1"
     ];
   };
 }
