@@ -1,17 +1,17 @@
 {
   description = "FM39hz's Nix flake";
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-25.05";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     hyprland = {
       url = "github:hyprwm/Hyprland";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     home-manager = {
-      url = "github:nix-community/home-manager/release-25.05";
+      url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     stylix = {
-      url = "github:nix-community/stylix/release-25.05";
+      url = "github:nix-community/stylix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     
@@ -36,7 +36,6 @@
     } @ inputs: let
       system = "x86_64-linux";
       specialArgs = { inherit inputs; }; # this is the important part
-      pkgs-unstable = inputs.hyprland.inputs.nixpkgs.legacyPackages.${pkgs.stdenv.hostPlatform.system};
       # User's specific information
       personal = {
         city = "Hanoi";
@@ -72,8 +71,7 @@
             {
               programs.hyprland = {
                 enable = true;
-                package = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;
-                portalPackage = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.xdg-desktop-portal-hyprland;
+                withUWSM = true;
               };
 
               xdg.portal = {
@@ -82,8 +80,8 @@
                 config = {
                   common.default = ["gtk"];
                   hyprland.default = [
-                    "gtk"
                     "hyprland"
+                    "gtk"
                   ];
                 };
                 extraPortals = with pkgs; [

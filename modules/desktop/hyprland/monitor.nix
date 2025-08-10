@@ -8,9 +8,5 @@
       ", preferred, auto, 1" # fallback for any other monitors
     ];
     
-    # Experimental features for color management
-    experimental = {
-      xx_color_management_v4 = true;
-    };
   };
 }

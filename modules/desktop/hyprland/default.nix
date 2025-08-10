@@ -54,6 +54,8 @@
   
   wayland.windowManager.hyprland = {
     enable = true;
+    package = null;  # Use system package
+    portalPackage = null;  # Use system portal
     xwayland.enable = true;
     systemd.enable = true;
     

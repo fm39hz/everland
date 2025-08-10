@@ -127,10 +127,8 @@
     fwupd.enable = true; # Firmware updates
     
     # Input method support
-    xserver = {
-      enable = true;
-      displayManager.gdm.enable = false; # We use greetd instead
-    };
+    xserver.enable = true;
+    displayManager.gdm.enable = false; # We use greetd instead
   };
   
   # Hardware acceleration
@@ -138,9 +136,16 @@
     graphics = {
       enable = true;
       enable32Bit = true;
-      # Use unstable Mesa for better hardware support
-      package = pkgs.mesa.drivers;
-      package32 = pkgs.pkgsi686Linux.mesa.drivers;
+      # Use unstable Mesa drivers for better hardware support
+      extraPackages = with pkgs; [
+        mesa
+        amdvlk
+        rocmPackages.clr.icd
+      ];
+      extraPackages32 = with pkgs.pkgsi686Linux; [
+        mesa
+        amdvlk
+      ];
     };
     bluetooth.enable = true;
   };

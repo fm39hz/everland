@@ -72,7 +72,6 @@
   home.packages = with pkgs; [
     tree
     fd
-    thefuck
     vivid
     gum
     figlet

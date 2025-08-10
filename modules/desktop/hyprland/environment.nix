@@ -12,7 +12,6 @@
       "GDK_BACKEND,wayland,x11"
       "QT_QPA_PLATFORM,wayland"
       "MOZ_ENABLE_WAYLAND,1"
-      "WLR_NO_HARDWARE_CURSORS,1"
       "HYPRCURSOR_THEME,everforest-cursors"
       "HYPRCURSOR_SIZE,32"
     ];
