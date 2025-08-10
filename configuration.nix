@@ -135,6 +135,7 @@
     bluetooth.enable = true;
   };
   
+  programs.hyprland.enable = true;
   programs.dconf.enable = true;
   # Gaming and graphics
   programs.steam = {

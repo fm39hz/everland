@@ -7,7 +7,6 @@
   ];
 
   # All program configurations moved to ./programs/ modules
-
   home = {
     # Remaining packages not handled by program modules
     packages = with pkgs; [
