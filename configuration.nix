@@ -14,6 +14,13 @@
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
   
+  # Kernel modules for GPU support (uncomment based on your GPU)
+  boot.initrd.kernelModules = [
+    "amdgpu"     # AMD GPUs
+    # "nvidia"     # NVIDIA GPUs  
+    # "i915"       # Intel integrated graphics
+  ];
+  
   # Networking configuration
   networking = {
     hostName = "fm39hz-desktop";
@@ -131,6 +138,9 @@
     graphics = {
       enable = true;
       enable32Bit = true;
+      # Use unstable Mesa for better hardware support
+      package = pkgs.mesa.drivers;
+      package32 = pkgs.pkgsi686Linux.mesa.drivers;
     };
     bluetooth.enable = true;
   };
