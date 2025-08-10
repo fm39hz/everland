@@ -2,6 +2,7 @@
   pkgs,
   personal,
   config,
+  inputs,
   ...
 }:
 {
@@ -54,15 +55,16 @@
   
   wayland.windowManager.hyprland = {
     enable = true;
-    package = null;  # Use system package
-    portalPackage = null;  # Use system portal
+    # Use Hyprland from inputs for plugin support
+    package = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;
+    portalPackage = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.xdg-desktop-portal-hyprland;
     xwayland.enable = true;
     systemd.enable = true;
     
-    plugins = with pkgs; [
-      hyprlandPlugins.xtra-dispatchers
-      hyprlandPlugins.hyprsplit
-      hyprlandPlugins.hyprspace
+    plugins = with pkgs.hyprlandPlugins; [
+      xtra-dispatchers
+      hyprsplit  
+      hyprspace
     ];
     
     # Basic settings - detailed configs are in separate modules

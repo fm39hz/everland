@@ -1,9 +1,10 @@
-{ personal, pkgs, ...}:
+{ personal, pkgs, inputs, ...}:
 {
   programs.home-manager.enable = true;
   imports = [
     ./modules/desktop
     ./programs
+    inputs.hyprland.homeManagerModules.default
   ];
 
   # All program configurations moved to ./programs/ modules

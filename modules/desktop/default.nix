@@ -1,4 +1,4 @@
-{ ... }:
+{ inputs, ... }:
 {
   imports = [
     # Choose one theming approach:
