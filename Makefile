@@ -1,14 +1,13 @@
 .PHONY: update clean build nixos-config
 
 update:
-	home-manager switch -b backup --flake .#fm39hz-desktop
+	home-manager switch -b backup --flake .#fm39hz --extra-experimental-features 'nix-command flakes'
 
 clean:
 	nix-collect-garbage -d
-	home-manager switch -b backup --flake .#fm39hz
 
 build:
-	home-manager build --flake .#fm39hz
+	home-manager build --flake .#fm39hz --extra-experimental-features 'nix-command flakes'
 
 # Generate hardware configuration for NixOS installation
 # Run this from NixOS installer after mounting target filesystem to /mnt
