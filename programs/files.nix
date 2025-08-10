@@ -79,8 +79,8 @@
     libva-utils
     
     # Desktop Integration
-    xdg-desktop-portal-gtk
-    xdg-desktop-portal-hyprland
+    # xdg-desktop-portal-gtk
+    # xdg-desktop-portal-hyprland
     
     # Qt/GTK theming
     libsForQt5.qt5ct
