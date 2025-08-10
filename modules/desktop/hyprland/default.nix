@@ -16,6 +16,8 @@
     ./autostart.nix
     ./hypridle.nix
     ./hyprlock.nix
+    ./window-rules.nix
+    ./plugin-config.nix
   ];
   xdg.configFile."uwsm/env".source = "${config.home.sessionVariablesPackage}/etc/profile.d/hm-session-vars.sh"; 
   home.packages = with pkgs; [
@@ -69,15 +71,8 @@
     
     # Basic settings - detailed configs are in separate modules
     settings = let
-      configDir = "${personal.homeDir}/.config/hypr/conf";
       font-family = "JetBrains Mono";
     in {
-      # Keep sourcing external files for rules and plugins that might be complex
-      source = [
-        "${configDir}/rules/rules.conf"
-        "${configDir}/plugins.conf"
-      ];
-      
       # Font configuration
       misc.font_family = font-family;
     };
