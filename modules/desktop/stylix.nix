@@ -1,7 +1,6 @@
-{ personal, pkgs, lib, ... }:
+{ personal, pkgs, ... }:
 let
-  # Centralized theme configuration - change this to switch themes
-  currentTheme = "everforest"; # Options: everforest, catppuccin-mocha, gruvbox, etc.
+  currentTheme = "everforest";
   
   # Theme definitions
   themes = {
@@ -10,21 +9,21 @@ let
       wallpaper = "${personal.homeDir}/Pictures/Wallpaper/ForestStairCase.png";
       polarity = "dark";
     };
-    catppuccin-mocha = {
-      base16Scheme = "${pkgs.base16-schemes}/share/themes/catppuccin-mocha.yaml";
-      wallpaper = "${personal.homeDir}/Pictures/Wallpaper/catppuccin-mocha.png";
-      polarity = "dark";
-    };
-    gruvbox = {
-      base16Scheme = "${pkgs.base16-schemes}/share/themes/gruvbox-dark-hard.yaml";
-      wallpaper = "${personal.homeDir}/Pictures/Wallpaper/gruvbox.png";
-      polarity = "dark";
-    };
-    dracula = {
-      base16Scheme = "${pkgs.base16-schemes}/share/themes/dracula.yaml";
-      wallpaper = "${personal.homeDir}/Pictures/Wallpaper/dracula.png";
-      polarity = "dark";
-    };
+    # catppuccin-mocha = {
+    #   base16Scheme = "${pkgs.base16-schemes}/share/themes/catppuccin-mocha.yaml";
+    #   wallpaper = "${personal.homeDir}/Pictures/Wallpaper/catppuccin-mocha.png";
+    #   polarity = "dark";
+    # };
+    # gruvbox = {
+    #   base16Scheme = "${pkgs.base16-schemes}/share/themes/gruvbox-dark-hard.yaml";
+    #   wallpaper = "${personal.homeDir}/Pictures/Wallpaper/gruvbox.png";
+    #   polarity = "dark";
+    # };
+    # dracula = {
+    #   base16Scheme = "${pkgs.base16-schemes}/share/themes/dracula.yaml";
+    #   wallpaper = "${personal.homeDir}/Pictures/Wallpaper/dracula.png";
+    #   polarity = "dark";
+    # };
   };
   
   selectedTheme = themes.${currentTheme};

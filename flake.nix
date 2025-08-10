@@ -35,10 +35,7 @@
     nixpkgs,
     home-manager,
     stylix,
-    zen-browser,
-    thorium-browser, 
     spicetify-nix,
-    ghostty,
     ...
     }: let
       system = "x86_64-linux";
@@ -50,7 +47,7 @@
         hostname = "fm39hz-desktop";
         timeZone = "Asia/Ho_Chi_Minh";
         defaultLocale = "en_US.UTF-8";
-        homeDir = "/home/fm39hz";  # Fixed: was referencing itself
+        homeDir = "/home/${personal.user}";
       };
       
     pkgs = import nixpkgs {
