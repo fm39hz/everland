@@ -139,24 +139,11 @@
   };
   
   # Hardware acceleration
-  hardware = {
-    graphics = {
-      enable = true;
-      enable32Bit = true;
-      # Use unstable Mesa drivers for better hardware support
-      extraPackages = with pkgs; [
-        mesa
-        amdvlk
-        rocmPackages.clr.icd
-      ];
-      extraPackages32 = with pkgs.pkgsi686Linux; [
-        mesa
-        amdvlk
-      ];
-    };
-    bluetooth.enable = true;
+  hardware.graphics = {
+    enable = true;
+    enable32Bit = true;
   };
-  
+
   programs.dconf.enable = true;
   # Gaming and graphics
   programs.steam = {
