@@ -14,13 +14,6 @@
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
   
-  # Kernel modules for GPU support (uncomment based on your GPU)
-  boot.initrd.kernelModules = [
-    "amdgpu"     # AMD GPUs
-    # "nvidia"     # NVIDIA GPUs  
-    # "i915"       # Intel integrated graphics
-  ];
-  
   # Networking configuration
   networking = {
     hostName = "fm39hz-desktop";
