@@ -44,7 +44,7 @@
   # User configuration
   users.users.fm39hz = {
     isNormalUser = true;
-    description = "FM39HZ";
+    description = "My user on Nixos";
     extraGroups = [ "networkmanager" "wheel" "docker" "video" "audio" ];
     shell = pkgs.zsh;
   };
@@ -57,9 +57,8 @@
     wget
     curl
     git
-    vim
+    neovim
     home-manager
-    greetd.tuigreet
   ];
   
   # System services
@@ -100,8 +99,8 @@
       enable = true;
       settings = {
         default_session = {
-          command = "${pkgs.greetd.tuigreet}/bin/tuigreet --time --cmd Hyprland";
-          user = "greeter";
+          command = "uwsm start -S hyprland-uwsm.desktop";
+          user = "fm39hz";
         };
       };
     };
