@@ -2,7 +2,10 @@
   description = "FM39hz's Nix flake";
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-25.05";
-    hyprland.url = "github:hyprwm/Hyprland";
+    hyprland = {
+      url = "github:hyprwm/Hyprland";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     home-manager = {
       url = "github:nix-community/home-manager/release-25.05";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -15,10 +18,6 @@
     # Community flakes for additional applications
     zen-browser = {
       url = "github:youwen5/zen-browser-flake";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-    thorium-browser = {
-      url = "github:siryoussef/thorium-browser-nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     spicetify-nix = {
