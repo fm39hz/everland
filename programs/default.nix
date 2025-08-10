@@ -1,4 +1,4 @@
-{ personal, ... }:
+{  ... }:
 
 {
   imports = [

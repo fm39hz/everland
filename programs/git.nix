@@ -9,7 +9,7 @@
       init.defaultBranch = "master";
       pull.rebase = true;
       core.editor = "nvim";
-      user.name = personal.name;
+      user.name = personal.user;
       user.email = personal.email;
     };
   };
