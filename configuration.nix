@@ -13,10 +13,23 @@
   # Bootloader configuration (adjust for your system)
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
+  
+  # Kernel parameters to handle Intel/AMD GPU conflicts
   boot.kernelParams = [
-  "video=DP-1:1920x1080@170"
-  "video=HDMI-A-1:1920x1080@60"
+    # Disable Intel integrated graphics to avoid conflicts
+    "i915.modeset=0"
+    # OR alternative: set AMD as primary
+    # "amdgpu.si_support=1"
+    # "amdgpu.cik_support=1" 
+    # Force early KMS for AMD
+    "amdgpu.dc=1"
   ];
+  
+  # Load AMD GPU modules early and exclude Intel
+  boot.initrd.kernelModules = [ "amdgpu" ];
+  boot.kernelModules = [ "kvm-intel" "amdgpu" ];
+  boot.blacklistedKernelModules = [ "i915" ]; # Blacklist Intel graphics
+  
   # Networking configuration
   networking = {
     hostName = personal.hostname;
@@ -55,7 +68,7 @@
   users.users.${personal.user} = {
     isNormalUser = true;
     description = "My user on Nixos";
-    extraGroups = [ "networkmanager" "wheel" "docker" "video" "audio" ];
+    extraGroups = [ "networkmanager" "wheel" "docker" "video" "audio" "seat" "input" ];
     shell = pkgs.zsh;
   };
   
@@ -84,33 +97,28 @@
       wireplumber.enable = true;
     };
     
-    # Docker service - handled by virtualisation.docker
-    
     # Bluetooth
     blueman.enable = true;
     
     # Power management
     power-profiles-daemon.enable = true;
     
-    # Location services can be added if needed
-    # geoclue2.enable = true; # For location services
-    
-    # Database services (optional - enable if needed)
-    # mysql = {
-    #   enable = true;
-    #   package = pkgs.mariadb;
-    # };
-    
     # Desktop portal
     dbus.enable = true;
     
-    # Greetd login manager (alternative to display managers)
+    # Seat management - CRITICAL for Wayland compositor access
+    seatd = {
+      enable = true;
+      user = personal.user;
+    };
+    
+    # Greetd login manager with seatd integration
     greetd = {
       enable = true;
       vt = 2;
       settings = {
         default_session = {
-          command = "${pkgs.hyprland}/bin/Hyprland"; # Direct binary instead
+          command = "${pkgs.hyprland}/bin/Hyprland";
           user = personal.user;
         };
       };
@@ -128,13 +136,11 @@
     # Hardware support
     fwupd.enable = true; # Firmware updates
     
-    # Input method support
-    services.xserver = {
-      enable = false;
-    };
+    # Disable X11 completely
+    xserver.enable = false;
   };
   
-  # Hardware acceleration
+  # Hardware acceleration for AMD GPU (with Intel iGPU support)
   hardware.graphics = {
     enable = true;
     enable32Bit = true;
@@ -143,21 +149,30 @@
       mesa
       # AMD hardware video acceleration
       libva
-      libva-utils  
-      # AMDGPU pro OpenCL (if needed)
-      # amdgpu-pro
+      libva-utils
+      # Intel graphics support (if not blacklisted)
+      intel-media-driver
+      intel-vaapi-driver
+      # AMDGPU OpenCL
+      rocmPackages.clr.icd
     ];
     extraPackages32 = with pkgs.pkgsi686Linux; [
       mesa
       libva
+      intel-media-driver
     ];
   };
 
-# Add AMD kernel modules
-boot.initrd.kernelModules = [ "amdgpu" ];
-boot.kernelModules = [ "kvm-intel" "amdgpu" ];
+  # Alternative GPU configuration (comment out blacklist above and use this):
+  # boot.kernelParams = [
+  #   # Use both GPUs but set AMD as primary for displays
+  #   "amdgpu.dc=1"
+  #   "i915.enable_guc=2"
+  # ];
+  # boot.blacklistedKernelModules = []; # Don't blacklist anything
 
   programs.dconf.enable = true;
+  
   # Gaming and graphics
   programs.steam = {
     enable = true;
