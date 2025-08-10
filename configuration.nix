@@ -13,7 +13,10 @@
   # Bootloader configuration (adjust for your system)
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
-  
+  boot.kernelParams = [
+  "video=DP-1:1920x1080@170"
+  "video=HDMI-A-1:1920x1080@60"
+  ];
   # Networking configuration
   networking = {
     hostName = "fm39hz-desktop";
