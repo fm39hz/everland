@@ -41,8 +41,10 @@
         city = "Hanoi";
         user = "fm39hz";
         hostname = "fm39hz-desktop";
+        email = "hitpoint2k3@gmail.com";
         timeZone = "Asia/Ho_Chi_Minh";
         defaultLocale = "en_US.UTF-8";
+        extraLocaleSettings = "vi_VN.UTF-8";
         homeDir = "/home/${personal.user}";
       };
       
@@ -76,6 +78,10 @@
 
               xdg.portal = {
                 enable = true;
+                xdg.terminal-exec = {
+                  enable = true;
+                  package = pkgs.xdg-terminal-exec-mkhl;
+                };
                 xdgOpenUsePortal = true;
                 config = {
                   common.default = ["gtk"];

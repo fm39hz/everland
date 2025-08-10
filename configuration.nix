@@ -19,23 +19,23 @@
   ];
   # Networking configuration
   networking = {
-    hostName = "fm39hz-desktop";
+    hostName = personal.hostname;
     networkmanager.enable = true;
   };
   
   # Time and locale
-  time.timeZone = "Asia/Ho_Chi_Minh";
-  i18n.defaultLocale = "en_US.UTF-8";
+  time.timeZone = personal.timezone;
+  i18n.defaultLocale = personal.defaultLocale;
   i18n.extraLocaleSettings = {
-    LC_ADDRESS = "vi_VN";
-    LC_IDENTIFICATION = "vi_VN";
-    LC_MEASUREMENT = "vi_VN";
-    LC_MONETARY = "vi_VN";
-    LC_NAME = "vi_VN";
-    LC_NUMERIC = "vi_VN";
-    LC_PAPER = "vi_VN";
-    LC_TELEPHONE = "vi_VN";
-    LC_TIME = "vi_VN";
+    LC_ADDRESS = personal.extraLocaleSettings;
+    LC_IDENTIFICATION = personal.extraLocaleSettings;
+    LC_MEASUREMENT = personal.extraLocaleSettings;
+    LC_MONETARY = personal.extraLocaleSettings;
+    LC_NAME = personal.extraLocaleSettings;
+    LC_NUMERIC = personal.extraLocaleSettings;
+    LC_PAPER = personal.extraLocaleSettings;
+    LC_TELEPHONE = personal.extraLocaleSettings;
+    LC_TIME = personal.extraLocaleSettings;
   };
 
   # Enable flakes
@@ -52,7 +52,7 @@
   nixpkgs.config.allowUnfree = true;
   
   # User configuration
-  users.users.fm39hz = {
+  users.users.${personal.user} = {
     isNormalUser = true;
     description = "My user on Nixos";
     extraGroups = [ "networkmanager" "wheel" "docker" "video" "audio" ];

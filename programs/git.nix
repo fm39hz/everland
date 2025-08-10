@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, personal, ... }:
 
 {
   # Git configuration
@@ -6,11 +6,11 @@
     enable = true;
     lfs.enable = true;
     extraConfig = {
-      init.defaultBranch = "main";
+      init.defaultBranch = "master";
       pull.rebase = true;
       core.editor = "nvim";
-      user.name = "fm39hz";
-      user.email = "your-email@example.com"; # Update with your email
+      user.name = personal.name;
+      user.email = personal.email;
     };
   };
 
@@ -28,5 +28,6 @@
   # Git-related packages
   home.packages = with pkgs; [
     diff-so-fancy
+    git-lfs
   ];
 }
