@@ -135,6 +135,7 @@
     bluetooth.enable = true;
   };
   
+  programs.dconf.enable = true;
   # Gaming and graphics
   programs.steam = {
     enable = true;

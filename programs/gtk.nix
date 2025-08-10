@@ -43,6 +43,7 @@
   # Additional theme packages
   home.packages = with pkgs; [
     # Icon themes
+    dconf
     papirus-icon-theme
     adwaita-icon-theme
     
