@@ -110,7 +110,7 @@
       vt = 2;
       settings = {
         default_session = {
-          command = "uwsm start hyprland-uwsm.desktop";
+          command = "${pkgs.hyprland}/bin/Hyprland"; # Direct binary instead
           user = personal.user;
         };
       };
@@ -138,7 +138,24 @@
   hardware.graphics = {
     enable = true;
     enable32Bit = true;
+    extraPackages = with pkgs; [
+      # AMD RADV drivers
+      mesa
+      # AMD hardware video acceleration
+      libva
+      libva-utils  
+      # AMDGPU pro OpenCL (if needed)
+      # amdgpu-pro
+    ];
+    extraPackages32 = with pkgs.pkgsi686Linux; [
+      mesa
+      libva
+    ];
   };
+
+# Add AMD kernel modules
+boot.initrd.kernelModules = [ "amdgpu" ];
+boot.kernelModules = [ "kvm-intel" "amdgpu" ];
 
   programs.dconf.enable = true;
   # Gaming and graphics
